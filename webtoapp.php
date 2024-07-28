@@ -2,7 +2,7 @@
 /*
 Plugin Name: Web to APK Generator
 Description: A plugin to generate an APK from a WordPress website using GitHub Actions.
-Version: 1.1
+Version: 0.1
 Author: Majdi M. S. Awad
 */
 
