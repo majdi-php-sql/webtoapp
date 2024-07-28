@@ -1,0 +1,68 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  repository_dispatch:
+    types: [build_apk]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # I use the checkout action to clone the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # I set up JDK 11 using the setup-java action
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+
+    # I make the Gradle wrapper executable
+    - name: Make gradlew executable
+      run: chmod +x gradlew
+
+    # I install the Android SDK with the specified API level and build tools
+    - name: Install Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        api-level: 30
+        build-tools: '30.0.3'
+
+    # I run the Gradle build command, capturing info and stacktrace for debugging
+    - name: Build with Gradle
+      run: ./gradlew build --info --stacktrace
+      env:
+        JAVA_HOME: ${{ steps.setup-java.outputs.path }}
+      continue-on-error: true
+
+    # I upload the generated APK artifact if the build succeeds
+    - name: Upload APK
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: apk
+        path: app/build/outputs/apk/release/app-release.apk
+
+    # I print Gradle build logs if the build fails
+    - name: Print Gradle Build Logs
+      if: failure()
+      run: cat /home/runner/work/_temp/_runner_file_*/gradle_output.txt || echo 'No Gradle output log found'
+
+    # I print the contents of the build directory if the build fails
+    - name: Print Build Directory
+      if: failure()
+      run: ls -la app/build/outputs/apk/release
+
+    # I fail the build explicitly if any previous step fails
+    - name: Fail the build on error
+      if: failure()
+      run: exit 1

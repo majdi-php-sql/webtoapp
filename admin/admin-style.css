@@ -1,0 +1,22 @@
+/* Styles for the admin page */
+#webtoapp-form {
+    /* I added a margin at the top of the form */
+    margin-top: 20px;
+}
+
+#webtoapp-result {
+    /* I added a margin at the top of the result div */
+    margin-top: 20px;
+    /* I set the font size for the result text */
+    font-size: 16px;
+}
+
+#webtoapp-result.success {
+    /* I set the text color to green for success messages */
+    color: green;
+}
+
+#webtoapp-result.error {
+    /* I set the text color to red for error messages */
+    color: red;
+}

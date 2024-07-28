@@ -1,0 +1,28 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: \n"
+
+msgid "Web to APK Generator"
+msgstr ""
+
+msgid "Website URL"
+msgstr ""
+
+msgid "Generate APK"
+msgstr ""
+
+msgid "Download Latest APK"
+msgstr ""
+
+msgid "An error occurred while processing your request."
+msgstr ""
+
+msgid "Failed to trigger the GitHub Actions build. Please check the plugin error log for details."
+msgstr ""
+
+msgid "GitHub Actions build triggered successfully. The APK will be available for download once the build is complete."
+msgstr ""
+
+msgid "URL is required"
+msgstr ""
